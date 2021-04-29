@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_comment_section">
+
+   <TextView
+       android:id="@+id/tv_commentsection"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Comment section"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="23dp"
+       >
+   </TextView>
+
+    <ScrollView
+        android:layout_below="@+id/tv_commentsection"
+        android:id="@+id/sv_comments"
+        android:layout_width="match_parent"
+        android:layout_height="441dp" />
+
+    <EditText
+        android:id="@+id/ip_comment"
+        android:layout_width="335dp"
+        android:layout_height="57dp"
+        android:layout_below="@+id/sv_comments"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="-2dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <Button
+        android:id="@+id/bn_post"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sv_comments"
+        android:layout_alignParentRight="true"
+        android:text="Post"
+        ></Button>
+
+</RelativeLayout>
