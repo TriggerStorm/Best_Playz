@@ -13,15 +13,32 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp"
         android:text="Details" />
-
-    <ListView
-        android:id="@+id/lv_details"
+    <ScrollView
+        android:id="@+id/sv_details"
+        android:layout_below="@+id/tv_details"
         android:layout_width="match_parent"
-        android:layout_height="356dp"
-        android:layout_below="@+id/tv_details" />
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginBottom="280dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/Tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+    </ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sv_details"
+        android:fillViewport="true">
     <ListView
         android:id="@+id/lv_comments"
-        android:layout_below="@+id/lv_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    </ScrollView>
 </RelativeLayout>

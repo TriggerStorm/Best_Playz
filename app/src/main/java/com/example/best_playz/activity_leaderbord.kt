@@ -41,8 +41,8 @@ class activity_leaderbord : AppCompatActivity() {
         // instans  repo
         val mRep = LBEntryInDB.get()
         //setting up observerble for BE_Friend and adding new adapter as an arrayadapter to fill the list view in the activety main
-        val updateGUIObserver = Observer<List<BE_LBEntry>>{ friend ->
-            val asStrings = friend.map { f -> "${f.id}, ${f.nickname}, ${f.score}, ${f.date}"}
+        val updateGUIObserver = Observer<List<BE_LBEntry>>{ LBE ->
+            val asStrings = LBE.map { f -> "${f.id}, ${f.nickname}, ${f.score}, ${f.date}"}
             val adapter: ListAdapter = ArrayAdapter(
                     this,
                     android.R.layout.simple_list_item_1,
