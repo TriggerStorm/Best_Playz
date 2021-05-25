@@ -29,8 +29,13 @@
             android:id="@+id/ib_game1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="Leaderbord" />
+            android:contentDescription="TODO"
+            android:onClick="Leaderbord"
+            android:src="@drawable/castle" />
+
 
     </ScrollView>
+
+
 
 </RelativeLayout>

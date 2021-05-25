@@ -7,7 +7,7 @@ import androidx.room.*
 @Dao
 interface LBEntryDao {
 
-    @Query("SELECT * from BE_LBEntry order by id")
+    @Query("SELECT * from BE_LBEntry  order by score DESC")
     fun getAll(): LiveData<List<BE_LBEntry>>
 
     @Query("SELECT nickname from BE_LBEntry order by nickname")

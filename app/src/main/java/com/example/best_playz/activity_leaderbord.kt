@@ -8,9 +8,17 @@ import android.view.Menu
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.Observer
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.best_playz.Model.BE_LBEntry
 import com.example.best_playz.Model.LBEntryDatabase
 import com.example.best_playz.Model.LBEntryInDB
+import org.json.JSONArray
+import org.json.JSONObject
 
 class activity_leaderbord : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +50,7 @@ class activity_leaderbord : AppCompatActivity() {
         val mRep = LBEntryInDB.get()
         //setting up observerble for BE_Friend and adding new adapter as an arrayadapter to fill the list view in the activety main
         val updateGUIObserver = Observer<List<BE_LBEntry>>{ LBE ->
-            val asStrings = LBE.map { f -> "${f.id}, ${f.nickname}, ${f.score}, ${f.date}"}
+            val asStrings = LBE.map { f -> "${f.id}, ${f.nickname}, ${f.score}, ${f.date} "}
             val adapter: ListAdapter = ArrayAdapter(
                     this,
                     android.R.layout.simple_list_item_1,
@@ -68,4 +76,31 @@ class activity_leaderbord : AppCompatActivity() {
 
 
     fun details(view: View) {}
+    fun GetOnlineDB(view: View) {
+     /*   val queue = Volley.newRequestQueue(this)
+        val url = "https://best-playz-heroku-backend.herokuapp.com/"
+        val mRep = LBEntryInDB.get()
+
+        val jarray = JsonArrayRequest(Request.Method.GET,url,
+                Response.Listener<JSONArray> { response: JSONArray? -> for () }
+        )
+        val jsonRequest =  JsonObjectRequest(Request.Method.GET,url,
+        Response.Listener<JSONObject> {
+            response ->
+            mRep.insert(BE_LBEntry(response))
+
+        }, Response.ErrorListener { "That didn't work!" })
+                )
+
+        val stringRequest = StringRequest(Request.Method.GET, url,
+                Response.Listener<String> { response ->
+                    // Display the first 500 characters of the response string.
+                    textView.text = "Response is: ${response.substring(0, 500)}"
+                },
+                Response.ErrorListener { textView.text = "That didn't work!" })
+
+// Add the request to the RequestQueue.
+        queue.add(stringRequest)
+*/
+    }
 }
