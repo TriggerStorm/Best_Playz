@@ -23,6 +23,10 @@ class activity_Details : AppCompatActivity() {
         val tvTime = findViewById<TextView>(R.id.Tv_time)
         val tvDate = findViewById<TextView>(R.id.Tv_date)
 
+        tvName.text = LBE.nickname
+        tvScore.text = LBE.score
+        tvTime.text = LBE.time
+        tvDate.text = LBE.date
       /*  val updateGUIObserver = Observer<List<BE_LBEntry>> { LBE ->
             val asStrings = LBE.map { f -> "${f.id}, ${f.nickname}, ${f.score}, ${f.date},${f.time}  " }
             val adapter: ListAdapter = ArrayAdapter(
@@ -32,9 +36,6 @@ class activity_Details : AppCompatActivity() {
             )
 
         }*/
-        tvName.text = LBE.nickname
-        tvScore.text = LBE.score
-        tvTime.text = LBE.time
-        tvDate.text = LBE.date
+
     }
 }

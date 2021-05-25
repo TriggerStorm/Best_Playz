@@ -1,24 +1,24 @@
 package com.example.best_playz
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListAdapter
+import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import com.example.best_playz.Model.BE_HSList
+import com.example.best_playz.Model.BE_HigeScore
 import com.example.best_playz.Model.BE_LBEntry
-import com.example.best_playz.Model.LBEntryDatabase
 import com.example.best_playz.Model.LBEntryInDB
-import org.json.JSONArray
-import org.json.JSONObject
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import okhttp3.*
+import java.io.IOException
 
 class activity_leaderbord : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,10 +39,10 @@ class activity_leaderbord : AppCompatActivity() {
     private fun insertTestData() {
        val mRep = LBEntryInDB.get()
 
-        mRep.insert(BE_LBEntry(0,"jimbo","250","29/04/2021","6.22"))
+       /* mRep.insert(BE_LBEntry(0,"jimbo","250","29/04/2021","6.22"))
         mRep.insert(BE_LBEntry(0,"Timmy","150","28/04/2021","5.35"))
         mRep.insert(BE_LBEntry(0,"Kim","200","26/04/2021","3.30"))
-        mRep.insert(BE_LBEntry(0,"Slayer2002","350","21/04/2021","4.20"))
+        mRep.insert(BE_LBEntry(0,"Slayer2002","350","21/04/2021","4.20"))*/
     }
 
     private fun setupDataObserver() {
@@ -50,7 +50,7 @@ class activity_leaderbord : AppCompatActivity() {
         val mRep = LBEntryInDB.get()
         //setting up observerble for BE_Friend and adding new adapter as an arrayadapter to fill the list view in the activety main
         val updateGUIObserver = Observer<List<BE_LBEntry>>{ LBE ->
-            val asStrings = LBE.map { f -> "${f.id}, ${f.nickname}, ${f.score}, ${f.date} "}
+            val asStrings = LBE.map { f -> " ${f.nickname}, ${f.score}, ${f.date} "}
             val adapter: ListAdapter = ArrayAdapter(
                     this,
                     android.R.layout.simple_list_item_1,
@@ -74,33 +74,38 @@ class activity_leaderbord : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     fun details(view: View) {}
     fun GetOnlineDB(view: View) {
-     /*   val queue = Volley.newRequestQueue(this)
-        val url = "https://best-playz-heroku-backend.herokuapp.com/"
         val mRep = LBEntryInDB.get()
+        println("bn clicked")
+        val url = "https://best-playz-heroku-backend.herokuapp.com/highscore"
+        val client = OkHttpClient()
+        val request = Request.Builder().url(url).build()
+        client.newCall(request).enqueue(object: Callback {
 
-        val jarray = JsonArrayRequest(Request.Method.GET,url,
-                Response.Listener<JSONArray> { response: JSONArray? -> for () }
-        )
-        val jsonRequest =  JsonObjectRequest(Request.Method.GET,url,
-        Response.Listener<JSONObject> {
-            response ->
-            mRep.insert(BE_LBEntry(response))
 
-        }, Response.ErrorListener { "That didn't work!" })
-                )
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body()?.string()
+                println(body)
+              val gbuld = GsonBuilder()
+                val gson = gbuld.create()
+                val leedArray: Array<BE_HigeScore> = gson.fromJson( body, Array<BE_HigeScore>::class.java )
+               // val LBE: ArrayList<BE_LBEntry> = ArrayList<BE_LBEntry>()
+                mRep.clear()
+                for (Hs in leedArray)
+                {
+                    //LBE.add(BE_LBEntry(0,Hs.nickname,Hs.score.toString(),Hs.date,Hs.time.toString()))
+                    mRep.insert(BE_LBEntry(0,Hs.nickname,Hs.score.toString(),Hs.date,Hs.time.toString()))
+                }
 
-        val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener<String> { response ->
-                    // Display the first 500 characters of the response string.
-                    textView.text = "Response is: ${response.substring(0, 500)}"
-                },
-                Response.ErrorListener { textView.text = "That didn't work!" })
 
-// Add the request to the RequestQueue.
-        queue.add(stringRequest)
-*/
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                println("Fail to execute request to db")
+            }
+        })
+
+
     }
 }

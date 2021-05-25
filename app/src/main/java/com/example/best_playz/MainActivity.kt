@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun Leaderbord(view: View) {
+        println("main bn clicked")
         val intent = Intent(this, activity_leaderbord::class.java)
         startActivity(intent)
     }
