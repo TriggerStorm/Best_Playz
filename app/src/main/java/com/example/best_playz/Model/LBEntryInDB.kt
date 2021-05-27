@@ -23,18 +23,18 @@ class LBEntryInDB  {
 
         database = Room.databaseBuilder(context.applicationContext,
             LBEntryDatabase::class.java,
-            "lbEntry-database").build()
+            "lbEntry-database").fallbackToDestructiveMigration().build()
 
         lbentryDao = database.lbEntryDao()
 
-        val updateCacheObserver = Observer<List<BE_LBEntry>>{ persons ->
-            cache = persons;
+        val updateCacheObserver = Observer<List<BE_LBEntry>>{ HigeScore ->
+            cache = HigeScore;
             Log.d(TAG, "Update Cache observer notified")
         }
         getAllLiveData().observe(context as LifecycleOwner, updateCacheObserver)
     }
 
-    fun getAllLiveData(): LiveData<List<BE_LBEntry>> = lbentryDao.getAll()
+    fun getAllLiveData(): LiveData<List<BE_LBEntry>>  = lbentryDao.getAll()
 
 
     fun getById(id: Int): BE_LBEntry? {

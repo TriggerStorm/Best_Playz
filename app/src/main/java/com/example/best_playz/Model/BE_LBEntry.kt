@@ -11,7 +11,8 @@ data class BE_LBEntry (
             var nickname: String,
             var score: String,
             var date: String,
-            var time: String
+            var time: String,
+            var comRef: String // id of online db higescore
     ) : Serializable {
 
 

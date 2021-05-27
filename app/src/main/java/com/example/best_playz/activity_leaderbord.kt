@@ -48,7 +48,7 @@ class activity_leaderbord : AppCompatActivity() {
     private fun setupDataObserver() {
         // instans  repo
         val mRep = LBEntryInDB.get()
-        //setting up observerble for BE_Friend and adding new adapter as an arrayadapter to fill the list view in the activety main
+        //setting up observerble for BE_Friend and adding new adapter as an arrayadapter to fill the list view in the activety
         val updateGUIObserver = Observer<List<BE_LBEntry>>{ LBE ->
             val asStrings = LBE.map { f -> " ${f.nickname}, ${f.score}, ${f.date} "}
             val adapter: ListAdapter = ArrayAdapter(
@@ -82,8 +82,6 @@ class activity_leaderbord : AppCompatActivity() {
         val client = OkHttpClient()
         val request = Request.Builder().url(url).build()
         client.newCall(request).enqueue(object: Callback {
-
-
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body()?.string()
                 println(body)
@@ -95,7 +93,7 @@ class activity_leaderbord : AppCompatActivity() {
                 for (Hs in leedArray)
                 {
                     //LBE.add(BE_LBEntry(0,Hs.nickname,Hs.score.toString(),Hs.date,Hs.time.toString()))
-                    mRep.insert(BE_LBEntry(0,Hs.nickname,Hs.score.toString(),Hs.date,Hs.time.toString()))
+                    mRep.insert(BE_LBEntry(0,Hs.nickname,Hs.score.toString(),Hs.date,Hs.time.toString(),Hs.id))
                 }
 
 
